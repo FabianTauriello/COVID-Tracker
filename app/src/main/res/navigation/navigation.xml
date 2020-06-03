@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/fragment_world_stats">
+    <fragment
+        android:id="@+id/fragment_world_stats"
+        android:name="io.github.fabiantauriello.covidtracker.view.GlobalStatsFragment"
+        android:label="fragment_world_stats"
+        tools:layout="@layout/fragment_global_stats" >
+        <action
+            android:id="@+id/action_fragment_world_stats_to_fragment_country_list"
+            app:destination="@id/fragment_country_list"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_country_list"
+        android:name="io.github.fabiantauriello.covidtracker.view.CountryListFragment"
+        android:label="fragment_country_list"
+        tools:layout="@layout/fragment_country_list">
+        <action
+            android:id="@+id/action_fragment_country_list_to_fragment_country_stats"
+            app:destination="@id/fragment_country_stats"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right" />
+        <argument android:name="countryList"
+            app:argType="string[]" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_country_stats"
+        android:name="io.github.fabiantauriello.covidtracker.view.CountryStatsFragment"
+        android:label="fragment_country_stats"
+        tools:layout="@layout/fragment_country_stats" >
+        <argument
+            android:name="countryName"
+            app:argType="string" />
+    </fragment>
+</navigation>

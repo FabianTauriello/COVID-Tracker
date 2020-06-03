@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Covid Tracker</string>
+    <string name="fragment_global_stats_heading">Global Stats</string>
+    <string name="fragment_global_stats_btn">Search By Country</string>
+    <string name="countries">Countries</string>
+    <string name="fragment_summary_stats_label_total_cases">Total Cases</string>
+    <string name="fragment_summary_stats_label_new_cases">New Cases</string>
+    <string name="fragment_summary_stats_label_total_deaths">Total Deaths</string>
+    <string name="fragment_summary_stats_label_new_deaths">New Deaths</string>
+    <string name="fragment_summary_stats_label_total_recovered">Total Recovered</string>
+    <string name="fragment_summary_stats_label_new_recovered">New Recovered</string>
+    <string name="global_stats">Global Stats</string>
+    <string name="placeholder_number">1,000,000</string>
+    <string name="placeholder_text">Placeholder</string>
+    <string name="search_hint">Search Countries</string>
+    <string name="missing_data_question_mark">"?"</string>
+    <string name="data_retrieval_error_msg">Failed to load data. Tap the refresh button to try again.</string>
+</resources>
