@@ -24,6 +24,7 @@
         android:paddingTop="15dp"
         android:paddingEnd="15dp"
         android:paddingBottom="15dp"
+        android:background="@drawable/btn_search_by_country"
         android:stateListAnimator="@null"
         android:text="@string/fragment_global_stats_btn"
         android:textSize="18sp"
