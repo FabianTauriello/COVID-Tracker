@@ -64,7 +64,7 @@ class CountryStatsFragment : Fragment(), CountryStatsContract.View {
     }
 
     override fun onDetach() {
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.countries)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.fragment_country_list_heading)
         super.onDetach()
     }
 

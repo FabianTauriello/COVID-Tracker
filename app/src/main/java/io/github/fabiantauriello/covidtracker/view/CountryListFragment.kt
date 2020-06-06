@@ -2,7 +2,6 @@ package io.github.fabiantauriello.covidtracker.view
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
@@ -29,7 +28,7 @@ class CountryListFragment : Fragment(), CountryListAdapter.OnCountryListener {
     ): View? {
         setHasOptionsMenu(true)
 
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.countries)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.fragment_country_list_heading)
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_country_list, container, false)
@@ -46,7 +45,7 @@ class CountryListFragment : Fragment(), CountryListAdapter.OnCountryListener {
     }
 
     override fun onDetach() {
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.global_stats)
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.fragment_global_stats_heading)
         super.onDetach()
     }
 

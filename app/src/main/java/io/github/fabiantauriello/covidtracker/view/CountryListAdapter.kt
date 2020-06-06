@@ -66,7 +66,7 @@ class CountryListAdapter(
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 countryNamesFiltered.clear()
-                countryNamesFiltered.addAll(results?.values as ArrayList<String>)
+                countryNamesFiltered.addAll(results?.values as Array<String>)
                 notifyDataSetChanged()
             }
         }

@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun configureActionBarTitle() {
-        supportActionBar?.title = getString(R.string.global_stats)
+        supportActionBar?.title = getString(R.string.fragment_global_stats_heading)
     }
 
 }
