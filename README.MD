@@ -7,6 +7,7 @@ Kotlin app for viewing statistical data relating to the COVID-19 disease.
 COVID Tracker allows users to view statistical data relating to the COVID-19 disease, by two scales - world or country. The application includes the following features:
 * MVP architecture
 * Single Activity design
+* Use of Android's Navigation Component
 * Use of the Volley library for HTTP requests
 * HTTP requests are made to the "CORONAVIRUS COVID19 API", where data is sourced from Johns Hopkins CSSE
 * Recycler View for displaying the list of 186 countries available. The Recycler View has a Search function for filtering to the desired country. 
