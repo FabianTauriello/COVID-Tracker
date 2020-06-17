@@ -16,6 +16,7 @@ COVID Tracker allows users to view statistical data relating to the COVID-19 dis
 I'll continue to improve the project so the following features/improvements are being considered:
 * Use more endpoints from API to display more data for an individual country
 * Add testing
+* Utilize Kotlin Coroutines
 * Better formatting
 * Refactor to save world stats. At present, when a user goes to the country list fragment, and then presses back, the api is called again.
 * Improve GUI design (e.g. themes/different colours, better buttons etc)
