@@ -6,81 +6,58 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import io.github.fabiantauriello.covidtracker.R
-import kotlinx.android.synthetic.main.country_list_item.view.*
+import io.github.fabiantauriello.covidtracker.databinding.CountryListItemBinding
+import io.github.fabiantauriello.covidtracker.viewmodel.CountryListViewModel
 import kotlin.collections.ArrayList
 
 class CountryListAdapter(
-    private val onCountryListener: OnCountryListener,
-    private val countryNamesFiltered: ArrayList<String>, // filtered list
-    private var countryNamesFull: Array<String> = countryNamesFiltered.toTypedArray() // full list
+    private var countryNames: ArrayList<String>?,
+    private val viewModel: CountryListViewModel
 ) : RecyclerView.Adapter<CountryListAdapter.MyViewHolder>(), Filterable {
 
-    inner class MyViewHolder(itemView: View, val onCountryListener: OnCountryListener) :
-        RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    private val LOG_TAG = this::class.simpleName
 
-        fun bind(country: String) {
-            itemView.tv_country_name.text = country
-            itemView.setOnClickListener(this)
-        }
+    inner class MyViewHolder(
+        val binding: CountryListItemBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        override fun onClick(v: View?) {
-            // check if user is selecting country from filtered list (countryNames) or full list (countryNamesFull)
-            val countrySelected =
-                if (countryNamesFiltered.count() > 0) countryNamesFiltered[adapterPosition] else countryNamesFull[adapterPosition]
-            onCountryListener.onCountryClicked(countrySelected)
+    }
+
+    // creates view holder
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        val binding = DataBindingUtil.inflate<CountryListItemBinding>(
+            LayoutInflater.from(parent.context),
+            R.layout.country_list_item,
+            parent,
+            false
+        )
+        return MyViewHolder(binding)
+    }
+
+    // binds data to view holder
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        Log.d(LOG_TAG, "onBindViewHolder called")
+        countryNames?.let {
+            holder.binding.countryName = countryNames?.get(position)
+            holder.binding.viewModel = viewModel
         }
     }
 
-    interface OnCountryListener {
-        fun onCountryClicked(country: String)
+    override fun getItemCount() = countryNames?.size ?: 0
+
+    override fun getFilter(): Filter {
+        TODO("Not yet implemented")
     }
 
-    fun updateCountryList(newList: Array<String>) {
-        countryNamesFiltered.clear()
-        countryNamesFiltered.addAll(newList)
-        countryNamesFull = newList
+    fun updateData(countryNames: ArrayList<String>?) {
+        this.countryNames = countryNames // TODO replace data instead of copying reference
         notifyDataSetChanged()
     }
 
-    // Anonymous inner classes
-    override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(searchInput: CharSequence?): FilterResults {
-                var filteredList: ArrayList<String> = ArrayList()
-                if (searchInput.isNullOrEmpty()) {
-                    filteredList.addAll(countryNamesFull)
-                } else {
-                    val filterPattern = searchInput.toString().toLowerCase().trim()
-                    for (item in countryNamesFull) {
-                        if (item.toLowerCase().contains(filterPattern)) {
-                            filteredList.add(item)
-                        }
-                    }
-                }
-                val results = FilterResults()
-                results.values = filteredList.toTypedArray()
-                return results
-            }
 
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                countryNamesFiltered.clear()
-                countryNamesFiltered.addAll(results?.values as Array<String>)
-                notifyDataSetChanged()
-            }
-        }
-    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.country_list_item, parent, false)
-        return MyViewHolder(view, onCountryListener)
-    }
-
-    override fun getItemCount(): Int = countryNamesFiltered.size
-
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(countryNamesFiltered[position])
-    }
 }
