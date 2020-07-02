@@ -53,9 +53,6 @@ class CountryListAdapter(
                     filteredList.addAll(countryNames)
                 } else {
                     val trimmedSearchText = searchInput.toString().toLowerCase().trim()
-                    Log.d(LOG_TAG, "performFiltering: country names (full) - $countryNames")
-                    Log.d(LOG_TAG, "performFiltering: filtered list - $filteredList")
-                    Log.d(LOG_TAG, "performFiltering: $trimmedSearchText")
                     for (countryName in countryNames) {
                         if (countryName.toLowerCase().contains(trimmedSearchText)) {
                             filteredList.add(countryName)
@@ -78,7 +75,7 @@ class CountryListAdapter(
     fun updateData(newList: ArrayList<String>) {
         countryNamesFiltered.clear()
         countryNamesFiltered.addAll(newList)
-        countryNames = newList // TODO don't copy reference
+        countryNames = newList
         notifyDataSetChanged()
     }
 

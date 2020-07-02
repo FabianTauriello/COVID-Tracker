@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.fabiantauriello.covidtracker.R
 import io.github.fabiantauriello.covidtracker.viewmodel.CountryListViewModel
 import kotlinx.android.synthetic.main.fragment_country_list.*
+import kotlin.math.log
 
 class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
 
@@ -25,6 +26,8 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
 
     private lateinit var countryListViewModel: CountryListViewModel
     private lateinit var adapter: CountryListAdapter
+
+    private var bool = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -90,10 +93,12 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
         })
         searchView.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
             override fun onViewDetachedFromWindow(v: View?) {
+                Log.d(LOG_TAG, "onViewDetachedFromWindow: ")
                 toggleKeyboard(false, searchView)
             }
 
             override fun onViewAttachedToWindow(v: View?) {
+                Log.d(LOG_TAG, "onViewAttachedToWindow: ")
                 searchView.requestFocus()
                 toggleKeyboard(true, searchView)
             }
@@ -118,12 +123,15 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
     }
 
     private fun toggleKeyboard(show: Boolean, view: View) {
-        val imm =
-            activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        if (show) {
-            imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.RESULT_HIDDEN)
-        } else {
-            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        activity?.let {
+            val imm = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            if (show) {
+                imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.RESULT_HIDDEN)
+                bool = true
+            } else {
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+                bool = false
+            }
         }
     }
 
