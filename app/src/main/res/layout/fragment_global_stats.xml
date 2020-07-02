@@ -19,143 +19,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tv_label_total_cases"
-                android:layout_width="wrap_content"
+            <include
+                android:id="@+id/include"
+                layout="@layout/fragment_summary_stats"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
-                android:text="@string/fragment_summary_stats_label_total_cases"
-                android:textSize="18sp"
+                app:summaryStats="@{viewModel.globalLiveData}"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tv_value_total_cases"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.globalLiveData.totalCases}"
-                android:textSize="30sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tv_label_total_cases"
-                app:layout_constraintStart_toStartOf="@+id/guideline" />
-
-            <TextView
-                android:id="@+id/tv_label_new_cases"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/fragment_summary_stats_label_new_cases"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_label_total_cases" />
-
-            <TextView
-                android:id="@+id/tv_value_new_cases"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.globalLiveData.newCases}"
-                android:textSize="30sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tv_label_new_cases"
-                app:layout_constraintStart_toStartOf="@+id/guideline" />
-
-            <TextView
-                android:id="@+id/tv_label_total_deaths"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/fragment_summary_stats_label_total_deaths"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_label_new_cases" />
-
-            <TextView
-                android:id="@+id/tv_value_total_deaths"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.globalLiveData.totalDeaths}"
-                android:textSize="30sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tv_label_total_deaths"
-                app:layout_constraintStart_toStartOf="@+id/guideline" />
-
-            <TextView
-                android:id="@+id/tv_label_new_deaths"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/fragment_summary_stats_label_new_deaths"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_label_total_deaths" />
-
-            <TextView
-                android:id="@+id/tv_value_new_deaths"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.globalLiveData.newDeaths}"
-                android:textSize="30sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tv_label_new_deaths"
-                app:layout_constraintStart_toStartOf="@+id/guideline" />
-
-            <TextView
-                android:id="@+id/tv_label_total_recovered"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/fragment_summary_stats_label_total_recovered"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_label_new_deaths" />
-
-            <TextView
-                android:id="@+id/tv_value_total_recovered"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.globalLiveData.totalRecovered}"
-                android:textSize="30sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tv_label_total_recovered"
-                app:layout_constraintStart_toStartOf="@+id/guideline" />
-
-            <TextView
-                android:id="@+id/tv_label_new_recovered"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="32dp"
-                android:text="@string/fragment_summary_stats_label_new_recovered"
-                android:textSize="18sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_label_total_recovered" />
-
-            <TextView
-                android:id="@+id/tv_value_new_recovered"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.globalLiveData.newRecovered}"
-                android:textSize="30sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/tv_label_new_recovered"
-                app:layout_constraintStart_toStartOf="@+id/guideline" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.55" />
-
-
-
-<!--            <include-->
-<!--                android:id="@+id/include"-->
-<!--                layout="@layout/fragment_summary_stats"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <Button
                 android:id="@+id/btn_country_stats"

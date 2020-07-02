@@ -21,7 +21,6 @@ class GlobalStatsViewModel(
 
     private val globalLiveData: MutableLiveData<SummaryStats?> = repository.globalSummary
 
-
     // return live data instead of mutable so ui knows it can't change the data.
     fun getGlobalLiveData(): LiveData<SummaryStats?> {
         return globalLiveData

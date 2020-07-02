@@ -133,8 +133,6 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
 
     override fun navigate(view: View) {
         val countrySelected = (view as TextView).text.toString()
-        Log.d(LOG_TAG, "onCountryClicked - $countrySelected")
-        // CountryListFragmentDirections generated from safe args plugin
         val action = CountryListFragmentDirections.actionCountryListFragToCountryFrag(countrySelected)
         view.findNavController().navigate(action)
     }

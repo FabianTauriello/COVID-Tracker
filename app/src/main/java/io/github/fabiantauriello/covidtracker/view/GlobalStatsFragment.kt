@@ -19,7 +19,7 @@ class GlobalStatsFragment : Fragment(), OpenCountryListNavigator {
 
     private val LOG_TAG = this::class.simpleName
 
-    private lateinit var menuItemRefresh: MenuItem // initialized in onCreateOptionsMenu
+    private lateinit var menuItemRefresh: MenuItem
     private lateinit var globalStatsViewModel: GlobalStatsViewModel
 
     private lateinit var binding: FragmentGlobalStatsBinding
@@ -56,7 +56,6 @@ class GlobalStatsFragment : Fragment(), OpenCountryListNavigator {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        configureLiveDataObserver()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -64,7 +63,7 @@ class GlobalStatsFragment : Fragment(), OpenCountryListNavigator {
         inflater.inflate(R.menu.refresh_menu, menu)
         menuItemRefresh = menu.findItem(R.id.action_refresh)
         // set up live data observer now because it reference the refresh menu item
-
+        configureLiveDataObserver()
     }
 
     // I should return true if I process the menu item and return super.onOptionsItemSelected(item) if I don't.
@@ -83,6 +82,7 @@ class GlobalStatsFragment : Fragment(), OpenCountryListNavigator {
     private fun configureLiveDataObserver() {
         globalStatsViewModel.getGlobalLiveData()
             .observe(requireActivity(), Observer { globalStats ->
+                Log.d(LOG_TAG, "configureLiveDataObserver: ")
                 if (globalStats == null) {
                     showAPIError()
                 }
