@@ -23,7 +23,6 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
 
     private val LOG_TAG = this::class.simpleName
 
-    private lateinit var menuItemRefresh: MenuItem
     private lateinit var countryListViewModel: CountryListViewModel
     private lateinit var adapter: CountryListAdapter
 
@@ -40,7 +39,7 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
         countryListViewModel = ViewModelProvider(requireActivity()).get(CountryListViewModel::class.java)
         countryListViewModel.navigator = this
 
-        adapter = CountryListAdapter(null, countryListViewModel)
+        adapter = CountryListAdapter(countryListViewModel, ArrayList())
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_country_list, container, false)
@@ -73,7 +72,6 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.country_list_menu, menu)
-        menuItemRefresh = menu.findItem(R.id.action_refresh)
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
         searchView.isIconifiedByDefault = false
@@ -114,11 +112,9 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
     }
 
     private fun stopProgressBar() {
-        menuItemRefresh.actionView = null
     }
 
     private fun startProgressBar() {
-        menuItemRefresh.actionView = ProgressBar(activity)
     }
 
     private fun toggleKeyboard(show: Boolean, view: View) {

@@ -21,9 +21,9 @@ class CountryListViewModel(
         fetchCountryList()
     }
 
-    private val countryListLiveData: MutableLiveData<ArrayList<String>?> = repository.countryList
+    private val countryListLiveData: MutableLiveData<ArrayList<String>> = repository.countryList
 
-    fun getCountryListLiveData(): LiveData<ArrayList<String>?> {
+    fun getCountryListLiveData(): LiveData<ArrayList<String>> {
         return countryListLiveData
     }
 

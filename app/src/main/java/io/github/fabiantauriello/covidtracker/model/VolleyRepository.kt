@@ -19,7 +19,7 @@ class VolleyRepository() : Repositories.Volley {
     private val gson = Gson()
 
     var globalSummary: MutableLiveData<SummaryStats?> = MutableLiveData()
-    var countryList: MutableLiveData<ArrayList<String>?> = MutableLiveData()
+    var countryList: MutableLiveData<ArrayList<String>> = MutableLiveData()
     var countrySummary: MutableLiveData<SummaryStats?> = MutableLiveData()
 
     override fun fetchGlobalSummary() {
@@ -55,7 +55,7 @@ class VolleyRepository() : Repositories.Volley {
                 Log.d(LOG_TAG, "fetchCountryList success")
             },
             Response.ErrorListener { error ->
-                countryList.value = null
+                countryList.value = ArrayList()
                 Log.d(LOG_TAG, "fetchCountryList failed")
             }
         )

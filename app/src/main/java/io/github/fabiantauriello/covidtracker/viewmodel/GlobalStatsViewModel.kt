@@ -5,9 +5,9 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import io.github.fabiantauriello.covidtracker.model.*
 import io.github.fabiantauriello.covidtracker.view.OpenCountryListNavigator
-import io.github.fabiantauriello.covidtracker.view.OpenCountryStatsNavigator
 
 class GlobalStatsViewModel(
     private val repository: VolleyRepository = VolleyRepository()
@@ -35,5 +35,7 @@ class GlobalStatsViewModel(
             navigator?.navigate()
         }
     }
+
+
 
 }
