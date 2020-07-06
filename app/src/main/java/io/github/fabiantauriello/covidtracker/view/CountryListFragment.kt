@@ -54,7 +54,6 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configureRecyclerView()
-        configureLiveDataObserver()
     }
 
     override fun onDetach() {
@@ -83,6 +82,8 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
         inflater.inflate(R.menu.country_list_menu, menu)
 
         menuItemRefresh = menu.findItem(R.id.action_refresh)
+
+        configureLiveDataObserver()
 
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
