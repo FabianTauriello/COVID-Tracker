@@ -3,6 +3,7 @@ package io.github.fabiantauriello.covidtracker.view
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -30,7 +31,7 @@ class GlobalStatsFragment : Fragment(), OpenCountryListNavigator {
         Log.d(LOG_TAG, "onCreateView called")
 
         // tell activity that this fragment has menu options it wants to add
-//        setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
 
         // using the activity as the owner means that the data will persist over the lifecycle of the activity. Therefore, the same ViewModel, with the
         // same data will be used if the user moves to one fragment, and returns to this one, and data will not be re-fetched.
@@ -58,18 +59,18 @@ class GlobalStatsFragment : Fragment(), OpenCountryListNavigator {
         super.onViewCreated(view, savedInstanceState)
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        Log.d(LOG_TAG, "onCreateOptionsMenu called")
-//        inflater.inflate(R.menu.refresh_menu, menu)
-//        menuItemRefresh = menu.findItem(R.id.action_refresh)
-//        // set up live data observer now because it reference the refresh menu item
-//        configureLiveDataObserver()
-//    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        Log.d(LOG_TAG, "onCreateOptionsMenu called")
+        inflater.inflate(R.menu.refresh_menu, menu)
+        menuItemRefresh = menu.findItem(R.id.action_refresh)
+        configureLiveDataObserver()
+    }
 
     // I should return true if I process the menu item and return super.onOptionsItemSelected(item) if I don't.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_refresh -> {
+                startProgressBar()
                 globalStatsViewModel.fetchGlobalSummary()
                 true
             }
@@ -85,17 +86,17 @@ class GlobalStatsFragment : Fragment(), OpenCountryListNavigator {
                 if (globalStats == null) {
                     showAPIError()
                 }
+                stopProgressBar()
             })
     }
 
-    //    private fun stopProgressBar() {
-//        menuItemRefresh.actionView = null
-//    }
-//
-//    private fun startProgressBar() {
-//        menuItemRefresh.actionView = ProgressBar(activity)
-//        val x = menuItemRefresh.actionView
-//    }
+    private fun stopProgressBar() {
+        menuItemRefresh.actionView = null
+    }
+
+    private fun startProgressBar() {
+        menuItemRefresh.actionView = ProgressBar(activity)
+    }
 
     private fun showAPIError() {
         Toast.makeText(

@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
 import android.widget.SearchView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -23,6 +24,8 @@ import kotlin.math.log
 class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
 
     private val LOG_TAG = this::class.simpleName
+
+    private lateinit var menuItemRefresh: MenuItem
 
     private lateinit var countryListViewModel: CountryListViewModel
     private lateinit var adapter: CountryListAdapter
@@ -62,8 +65,11 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
     private fun configureLiveDataObserver() {
         countryListViewModel.getCountryListLiveData()
             .observe(viewLifecycleOwner, Observer { countryList ->
-                // update UI
-                adapter.updateData(countryList)
+                if (countryList == null) {
+                    showAPIError()
+                } else {
+                    adapter.updateData(countryList)
+                }
                 stopProgressBar()
             })
     }
@@ -75,6 +81,9 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.country_list_menu, menu)
+
+        menuItemRefresh = menu.findItem(R.id.action_refresh)
+
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem.actionView as SearchView
         searchView.isIconifiedByDefault = false
@@ -117,9 +126,11 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
     }
 
     private fun stopProgressBar() {
+        menuItemRefresh.actionView = null
     }
 
     private fun startProgressBar() {
+        menuItemRefresh.actionView = ProgressBar(activity)
     }
 
     private fun toggleKeyboard(show: Boolean, view: View) {
@@ -141,5 +152,12 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
         view.findNavController().navigate(action)
     }
 
+    private fun showAPIError() {
+        Toast.makeText(
+            activity?.applicationContext,
+            getString(R.string.data_retrieval_error_msg),
+            Toast.LENGTH_LONG
+        ).show()
+    }
 
 }
