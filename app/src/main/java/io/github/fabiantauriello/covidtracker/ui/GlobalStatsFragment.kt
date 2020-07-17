@@ -1,25 +1,22 @@
-package io.github.fabiantauriello.covidtracker.view
+package io.github.fabiantauriello.covidtracker.ui
 
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import io.github.fabiantauriello.covidtracker.R
+import io.github.fabiantauriello.covidtracker.database.COVIDTrackerDatabase
 import io.github.fabiantauriello.covidtracker.databinding.FragmentGlobalStatsBinding
-import io.github.fabiantauriello.covidtracker.viewmodel.GlobalStatsViewModel
-
+import io.github.fabiantauriello.covidtracker.viewmodels.GlobalStatsViewModel
 
 class GlobalStatsFragment : Fragment(), OpenCountryListNavigator {
 
     private val LOG_TAG = this::class.simpleName
 
-    private lateinit var menuItemRefresh: MenuItem
     private lateinit var globalStatsViewModel: GlobalStatsViewModel
 
     private lateinit var binding: FragmentGlobalStatsBinding
@@ -53,57 +50,6 @@ class GlobalStatsFragment : Fragment(), OpenCountryListNavigator {
 
         // Inflate the layout for this fragment
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        Log.d(LOG_TAG, "onCreateOptionsMenu called")
-        inflater.inflate(R.menu.refresh_menu, menu)
-        menuItemRefresh = menu.findItem(R.id.action_refresh)
-        configureLiveDataObserver()
-    }
-
-    // I should return true if I process the menu item and return super.onOptionsItemSelected(item) if I don't.
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_refresh -> {
-                startProgressBar()
-                globalStatsViewModel.fetchGlobalSummary()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    // observe changes to monitor success of api call
-    private fun configureLiveDataObserver() {
-        globalStatsViewModel.getGlobalLiveData()
-            .observe(requireActivity(), Observer { globalStats ->
-                Log.d(LOG_TAG, "configureLiveDataObserver: ")
-                if (globalStats == null) {
-                    showAPIError()
-                }
-                stopProgressBar()
-            })
-    }
-
-    private fun stopProgressBar() {
-        menuItemRefresh.actionView = null
-    }
-
-    private fun startProgressBar() {
-        menuItemRefresh.actionView = ProgressBar(activity)
-    }
-
-    private fun showAPIError() {
-        Toast.makeText(
-            activity?.applicationContext,
-            getString(R.string.data_retrieval_error_msg),
-            Toast.LENGTH_LONG
-        ).show()
     }
 
     override fun navigate() {

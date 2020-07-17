@@ -6,7 +6,7 @@
     app:startDestination="@id/fragment_global_stats">
     <fragment
         android:id="@+id/fragment_global_stats"
-        android:name="io.github.fabiantauriello.covidtracker.view.GlobalStatsFragment"
+        android:name="io.github.fabiantauriello.covidtracker.ui.GlobalStatsFragment"
         android:label="fragment_global_stats"
         tools:layout="@layout/fragment_global_stats">
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_country_list"
-        android:name="io.github.fabiantauriello.covidtracker.view.CountryListFragment"
+        android:name="io.github.fabiantauriello.covidtracker.ui.CountryListFragment"
         android:label="fragment_country_list"
         tools:layout="@layout/fragment_country_list">
         <action
@@ -28,11 +28,11 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_country_stats"
-        android:name="io.github.fabiantauriello.covidtracker.view.CountryStatsFragment"
+        android:name="io.github.fabiantauriello.covidtracker.ui.CountryStatsFragment"
         android:label="fragment_country_stats"
         tools:layout="@layout/fragment_country_stats" >
         <argument
-            android:name="countryName"
-            app:argType="string" />
+            android:name="country"
+            app:argType="io.github.fabiantauriello.covidtracker.domain.CountryData" />
     </fragment>
 </navigation>

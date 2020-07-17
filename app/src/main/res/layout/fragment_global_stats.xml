@@ -5,17 +5,16 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="viewModel"
-            type="io.github.fabiantauriello.covidtracker.viewmodel.GlobalStatsViewModel" />
+            type="io.github.fabiantauriello.covidtracker.viewmodels.GlobalStatsViewModel" />
     </data>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        tools:context=".view.GlobalStatsFragment">
+        tools:context=".ui.GlobalStatsFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,7 +28,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                bind:summaryStats="@{viewModel.globalLiveData}" />
+                bind:globalData="@{viewModel.globalLiveData}" />
 
             <Button
                 android:id="@+id/btn_country_stats"

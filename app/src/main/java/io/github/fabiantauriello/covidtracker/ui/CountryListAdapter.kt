@@ -1,6 +1,5 @@
-package io.github.fabiantauriello.covidtracker.view
+package io.github.fabiantauriello.covidtracker.ui
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -9,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import io.github.fabiantauriello.covidtracker.R
 import io.github.fabiantauriello.covidtracker.databinding.CountryListItemBinding
-import io.github.fabiantauriello.covidtracker.viewmodel.CountryListViewModel
+import io.github.fabiantauriello.covidtracker.viewmodels.CountryListViewModel
 import kotlin.collections.ArrayList
 
 class CountryListAdapter(

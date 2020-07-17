@@ -1,4 +1,4 @@
-package io.github.fabiantauriello.covidtracker.view
+package io.github.fabiantauriello.covidtracker.ui
 
 import android.app.Activity
 import android.os.Bundle
@@ -6,10 +6,8 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.ProgressBar
 import android.widget.SearchView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -17,20 +15,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.fabiantauriello.covidtracker.R
-import io.github.fabiantauriello.covidtracker.viewmodel.CountryListViewModel
+import io.github.fabiantauriello.covidtracker.viewmodels.CountryListViewModel
 import kotlinx.android.synthetic.main.fragment_country_list.*
-import kotlin.math.log
 
 class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
 
     private val LOG_TAG = this::class.simpleName
 
-    private lateinit var menuItemRefresh: MenuItem
-
     private lateinit var countryListViewModel: CountryListViewModel
     private lateinit var adapter: CountryListAdapter
-
-    private var bool = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,9 +33,11 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
 
         setHasOptionsMenu(true)
 
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.fragment_country_list_heading)
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.fragment_country_list_heading)
 
-        countryListViewModel = ViewModelProvider(requireActivity()).get(CountryListViewModel::class.java)
+        countryListViewModel =
+            ViewModelProvider(requireActivity()).get(CountryListViewModel::class.java)
         countryListViewModel.navigator = this
 
         adapter = CountryListAdapter(countryListViewModel, ArrayList())
@@ -57,20 +52,9 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
     }
 
     override fun onDetach() {
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.fragment_global_stats_heading)
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.fragment_global_stats_heading)
         super.onDetach()
-    }
-
-    private fun configureLiveDataObserver() {
-        countryListViewModel.getCountryListLiveData()
-            .observe(viewLifecycleOwner, Observer { countryList ->
-                if (countryList == null) {
-                    showAPIError()
-                } else {
-                    adapter.updateData(countryList)
-                }
-                stopProgressBar()
-            })
     }
 
     private fun configureRecyclerView() {
@@ -80,8 +64,6 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.country_list_menu, menu)
-
-        menuItemRefresh = menu.findItem(R.id.action_refresh)
 
         configureLiveDataObserver()
 
@@ -103,62 +85,47 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
         })
         searchView.addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
             override fun onViewDetachedFromWindow(v: View?) {
-                Log.d(LOG_TAG, "onViewDetachedFromWindow: ")
                 toggleKeyboard(false, searchView)
             }
 
             override fun onViewAttachedToWindow(v: View?) {
-                Log.d(LOG_TAG, "onViewAttachedToWindow: ")
                 searchView.requestFocus()
                 toggleKeyboard(true, searchView)
             }
         })
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_refresh -> {
-                startProgressBar()
-                countryListViewModel.fetchCountryList()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    private fun stopProgressBar() {
-        menuItemRefresh.actionView = null
-    }
-
-    private fun startProgressBar() {
-        menuItemRefresh.actionView = ProgressBar(activity)
+    private fun configureLiveDataObserver() {
+        countryListViewModel.countryLiveData
+            .observe(viewLifecycleOwner, Observer { countryList ->
+                adapter.updateData(ArrayList(countryList.map { it.countryName }))
+            })
     }
 
     private fun toggleKeyboard(show: Boolean, view: View) {
         activity?.let {
-            val imm = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm =
+                activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             if (show) {
-                imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.RESULT_HIDDEN)
-                bool = true
+                imm.toggleSoftInput(
+                    InputMethodManager.SHOW_IMPLICIT,
+                    InputMethodManager.RESULT_HIDDEN
+                )
             } else {
                 imm.hideSoftInputFromWindow(view.windowToken, 0)
-                bool = false
             }
         }
     }
 
     override fun navigate(view: View) {
-        val countrySelected = (view as TextView).text.toString()
-        val action = CountryListFragmentDirections.actionCountryListFragToCountryFrag(countrySelected)
+        val countryNameSelected = (view as TextView).text.toString()
+        val countrySelected =
+            countryListViewModel.countryLiveData.value?.filter { it.countryName == countryNameSelected }
+                ?.get(0) // TODO kind of ugly
+        val action = CountryListFragmentDirections.actionCountryListFragToCountryFrag(
+            countrySelected!! // TODO also ugly
+        )
         view.findNavController().navigate(action)
-    }
-
-    private fun showAPIError() {
-        Toast.makeText(
-            activity?.applicationContext,
-            getString(R.string.data_retrieval_error_msg),
-            Toast.LENGTH_LONG
-        ).show()
     }
 
 }

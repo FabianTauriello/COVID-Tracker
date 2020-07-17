@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
-            name="summaryStats"
-            type="io.github.fabiantauriello.covidtracker.model.SummaryStats" />
+            name="globalData"
+            type="io.github.fabiantauriello.covidtracker.domain.GlobalData" />
+        <variable
+            name="countryData"
+            type="io.github.fabiantauriello.covidtracker.domain.CountryData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,7 +31,7 @@
             android:id="@+id/tv_value_total_cases"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{summaryStats.totalCases}"
+            android:text="@{globalData == null ? countryData.totalCases : globalData.totalCases}"
             android:textSize="30sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_label_total_cases"
             app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -49,7 +51,7 @@
             android:id="@+id/tv_value_new_cases"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{summaryStats.newCases}"
+            android:text="@{globalData == null ? countryData.newCases : globalData.newCases}"
             android:textSize="30sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_label_new_cases"
             app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -69,7 +71,7 @@
             android:id="@+id/tv_value_total_deaths"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{summaryStats.totalDeaths}"
+            android:text="@{globalData == null ? countryData.totalDeaths : globalData.totalDeaths}"
             android:textSize="30sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_label_total_deaths"
             app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -89,7 +91,7 @@
             android:id="@+id/tv_value_new_deaths"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{summaryStats.newDeaths}"
+            android:text="@{globalData == null ? countryData.newDeaths : globalData.newDeaths}"
             android:textSize="30sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_label_new_deaths"
             app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -109,7 +111,7 @@
             android:id="@+id/tv_value_total_recovered"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{summaryStats.totalRecovered}"
+            android:text="@{globalData == null ? countryData.totalRecovered : globalData.totalRecovered}"
             android:textSize="30sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_label_total_recovered"
             app:layout_constraintStart_toStartOf="@+id/guideline" />
@@ -129,7 +131,7 @@
             android:id="@+id/tv_value_new_recovered"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{summaryStats.newRecovered}"
+            android:text="@{globalData == null ? countryData.newRecovered : globalData.newRecovered}"
             android:textSize="30sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_label_new_recovered"
             app:layout_constraintStart_toStartOf="@+id/guideline" />

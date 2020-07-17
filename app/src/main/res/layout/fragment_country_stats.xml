@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="io.github.fabiantauriello.covidtracker.viewmodel.CountryStatsViewModel" />
+            type="io.github.fabiantauriello.covidtracker.viewmodels.CountryStatsViewModel" />
     </data>
 
     <ScrollView
@@ -17,7 +17,7 @@
         android:clickable="true"
         android:fillViewport="true"
         android:focusable="true"
-        tools:context=".view.CountryStatsFragment">
+        tools:context=".ui.CountryStatsFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 layout="@layout/fragment_summary_stats"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                bind:summaryStats="@{viewModel.countryLiveData}"
+                bind:countryData="@{viewModel.countryData}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

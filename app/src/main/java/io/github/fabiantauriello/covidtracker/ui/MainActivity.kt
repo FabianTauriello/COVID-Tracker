@@ -1,8 +1,9 @@
-package io.github.fabiantauriello.covidtracker.view
+package io.github.fabiantauriello.covidtracker.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import io.github.fabiantauriello.covidtracker.R
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         supportActionBar?.title = getString(R.string.fragment_global_stats_heading)
+
     }
 
 }

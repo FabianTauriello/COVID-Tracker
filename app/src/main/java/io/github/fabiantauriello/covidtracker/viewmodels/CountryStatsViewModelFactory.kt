@@ -1,10 +1,11 @@
-package io.github.fabiantauriello.covidtracker.viewmodel
+package io.github.fabiantauriello.covidtracker.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import io.github.fabiantauriello.covidtracker.domain.CountryData
 
-class CountryStatsViewModelFactory(private val countryName: String) : ViewModelProvider.Factory {
+class CountryStatsViewModelFactory(private val countrySelected: CountryData) : ViewModelProvider.Factory {
 
     val LOG_TAG = this::class.simpleName
 
@@ -14,7 +15,7 @@ class CountryStatsViewModelFactory(private val countryName: String) : ViewModelP
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(CountryStatsViewModel::class.java)) {
-            return CountryStatsViewModel(countryName) as T
+            return CountryStatsViewModel(countrySelected) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

@@ -1,4 +1,4 @@
-package io.github.fabiantauriello.covidtracker.view
+package io.github.fabiantauriello.covidtracker.ui
 
 interface OpenCountryListNavigator {
     fun navigate()
