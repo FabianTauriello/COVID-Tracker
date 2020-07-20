@@ -51,8 +51,6 @@ class COVIDTrackerDatabaseTests {
         db.close()
     }
 
-    // SummaryStatsDao tests
-
     @Test
     fun insertAndGetGlobalSummaryStats() {
         val expectedGlobalSummaryStats = GlobalEntity(
@@ -62,44 +60,21 @@ class COVIDTrackerDatabaseTests {
             newDeaths = "3000",
             totalDeaths = "4000",
             newRecovered = "5000",
-            totalRecovered = "6000",
-            isGlobal = true
+            totalRecovered = "6000"
         )
 
         globalDataDao.insert(expectedGlobalSummaryStats)
 
-        val retrievedGlobalSummaryStats = globalDataDao.getGlobalData(true).blockingObserve()
+        val retrievedGlobalSummaryStats = globalDataDao.getGlobalData().blockingObserve()
 
         assertEquals(expectedGlobalSummaryStats, retrievedGlobalSummaryStats)
     }
 
     @Test
-    fun insertAndGetCountrySummaryStats() {
-        val expectedCountrySummaryStats = GlobalEntity(
-            id = 0,
-            newCases = "1000",
-            totalCases = "2000",
-            newDeaths = "3000",
-            totalDeaths = "4000",
-            newRecovered = "5000",
-            totalRecovered = "6000",
-            isGlobal = false
-        )
-
-        globalDataDao.insert(expectedCountrySummaryStats)
-
-        val retrievedCountrySummaryStats = globalDataDao.getGlobalData(false).blockingObserve()
-
-        assertEquals(expectedCountrySummaryStats, retrievedCountrySummaryStats)
-    }
-
-    // CountryDao tests
-
-    @Test
     fun insertAndGetCountryList() {
         val countryList = mutableListOf<CountryEntity>()
-        countryList.add(CountryEntity(1, "Australia"))
-        countryList.add(CountryEntity(2, "Belgium"))
+        countryList.add(CountryEntity("Australia", "1000", "2000", "3000", "4000", "5000", "6000"))
+        countryList.add(CountryEntity("Belgium", "1000", "2000", "3000", "4000", "5000", "6000"))
 
         countryDataDao.insertAll(countryList)
 

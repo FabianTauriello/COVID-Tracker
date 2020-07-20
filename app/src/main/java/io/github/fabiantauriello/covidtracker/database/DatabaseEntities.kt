@@ -14,7 +14,7 @@ data class GlobalEntity(
     val id: Long = 0L,
 
     @ColumnInfo(name = "new_cases")
-    val newCases: String,
+    var newCases: String,
 
     @ColumnInfo(name = "total_cases")
     val totalCases: String,

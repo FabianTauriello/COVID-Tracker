@@ -1,10 +1,7 @@
 package io.github.fabiantauriello.covidtracker.database
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
 @Dao
 interface GlobalDataDao {
@@ -23,7 +20,7 @@ interface CountryDataDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(countryEntities: List<CountryEntity>)
 
-    @Query("SELECT * FROM country_data")    // TODO consider adding "ORDER BY" here
+    @Query("SELECT * FROM country_data")
     fun getAllCountries(): LiveData<List<CountryEntity>>
 
 }

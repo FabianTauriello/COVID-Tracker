@@ -2,7 +2,6 @@ package io.github.fabiantauriello.covidtracker.repositories
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import io.github.fabiantauriello.covidtracker.DataType
 import io.github.fabiantauriello.covidtracker.database.COVIDTrackerDatabase
@@ -19,7 +18,7 @@ import kotlinx.coroutines.withContext
  * Repository for accessing remote and local data sources.
  * (fetches COVID data from the network (Volley) and stores them on disk (Room))
  */
-class Repository { // TODO consider making different repositories. ATM, a new repository is getting created for each viewmodel which doesn't make much sense.
+class Repository { // TODO consider making different repositories.
 
     private val LOG_TAG = this::class.simpleName
 
@@ -28,12 +27,14 @@ class Repository { // TODO consider making different repositories. ATM, a new re
     // get global data from local db
     var globalLiveData: LiveData<GlobalData> =
         Transformations.map(database.globalDataDao.getGlobalData()) {
-            it.asDomainModel() // TODO this breaks first time app is installed because it is null
+            Log.d(LOG_TAG, "globalLiveData Transformations called")
+            it?.asDomainModel()
         }
 
     // get country data from local db
     var countryListLiveData: LiveData<List<CountryData>> =
         Transformations.map(database.countryDataDao.getAllCountries()) {
+            Log.d(LOG_TAG, "countryLiveData Transformations called")
             it.asDomainModels()
         }
 
