@@ -3,12 +3,12 @@ package io.github.fabiantauriello.covidtracker.repositories
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import io.github.fabiantauriello.covidtracker.DataType
+import io.github.fabiantauriello.covidtracker.database.DataType
 import io.github.fabiantauriello.covidtracker.database.COVIDTrackerDatabase
 import io.github.fabiantauriello.covidtracker.domain.CountryData
 import io.github.fabiantauriello.covidtracker.domain.GlobalData
 import io.github.fabiantauriello.covidtracker.network.COVIDTrackerNetwork
-import io.github.fabiantauriello.covidtracker.util.asDatabaseModels
+import io.github.fabiantauriello.covidtracker.util.asDatabaseModel
 import io.github.fabiantauriello.covidtracker.util.asDomainModel
 import io.github.fabiantauriello.covidtracker.util.asDomainModels
 import kotlinx.coroutines.Dispatchers
@@ -51,15 +51,14 @@ class Repository { // TODO consider making different repositories.
             when (dataType) {
                 DataType.GLOBAL -> {
                     val summaryResponse = COVIDTrackerNetwork.service.getSummary()
-                    database.globalDataDao.insert(summaryResponse.global.asDatabaseModels())
+                    database.globalDataDao.insert(summaryResponse.global.asDatabaseModel())
                 }
                 DataType.COUNTRY -> {
                     val summaryResponse = COVIDTrackerNetwork.service.getSummary()
-                    database.countryDataDao.insertAll(summaryResponse.countries.asDatabaseModels())
+                    database.countryDataDao.insertAll(summaryResponse.countries.asDatabaseModel())
                 }
             }
         }
     }
-
-
+    
 }

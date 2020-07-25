@@ -15,29 +15,29 @@ class CountryListAdapter(
     private val viewModel: CountryListViewModel,
     private var countryNamesFiltered: ArrayList<String>, // list that will be shown to user
     private var countryNames: ArrayList<String> = countryNamesFiltered.clone() as ArrayList<String>
-) : RecyclerView.Adapter<CountryListAdapter.MyViewHolder>(), Filterable {
+) : RecyclerView.Adapter<CountryListAdapter.CountryItemViewHolder>(), Filterable {
 
     private val LOG_TAG = this::class.simpleName
 
-    inner class MyViewHolder(
+    inner class CountryItemViewHolder(
         val binding: CountryListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
     }
 
     // creates view holder
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryItemViewHolder {
         val binding = DataBindingUtil.inflate<CountryListItemBinding>(
             LayoutInflater.from(parent.context),
             R.layout.country_list_item,
             parent,
             false
         )
-        return MyViewHolder(binding)
+        return CountryItemViewHolder(binding)
     }
 
     // binds data to view holder
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CountryItemViewHolder, position: Int) {
         holder.binding.countryName = countryNamesFiltered[position]
         holder.binding.viewModel = viewModel
     }

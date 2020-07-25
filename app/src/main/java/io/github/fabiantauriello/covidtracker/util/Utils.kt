@@ -60,7 +60,7 @@ fun GlobalEntity.asDomainModel(): GlobalData = GlobalData(
     totalRecovered = totalRecovered
 )
 
-fun GlobalData.asDatabaseModels(): GlobalEntity = GlobalEntity(
+fun GlobalData.asDatabaseModel(): GlobalEntity = GlobalEntity(
     newCases = newCases,
     totalCases = totalCases,
     newDeaths = newDeaths,
@@ -68,20 +68,6 @@ fun GlobalData.asDatabaseModels(): GlobalEntity = GlobalEntity(
     newRecovered = newRecovered,
     totalRecovered = totalRecovered
 )
-
-fun List<CountryData>.asDatabaseModels(): List<CountryEntity> {
-    return map {
-        CountryEntity(
-            countryName = it.countryName,
-            newCases = it.newCases,
-            totalCases = it.totalCases,
-            newDeaths = it.newDeaths,
-            totalDeaths = it.totalDeaths,
-            newRecovered = it.newRecovered,
-            totalRecovered = it.totalRecovered
-        )
-    }
-}
 
 fun List<CountryEntity>.asDomainModels(): List<CountryData> {
     return map {
@@ -97,16 +83,18 @@ fun List<CountryEntity>.asDomainModels(): List<CountryData> {
     }
 }
 
-fun CountryEntity.asDomainModel(): CountryData {
-    return CountryData(
-        this.countryName,
-        this.newCases,
-        this.totalCases,
-        this.newDeaths,
-        this.totalDeaths,
-        this.newRecovered,
-        this.totalRecovered
-    )
+fun List<CountryData>.asDatabaseModel(): List<CountryEntity> {
+    return map {
+        CountryEntity(
+            countryName = it.countryName,
+            newCases = it.newCases,
+            totalCases = it.totalCases,
+            newDeaths = it.newDeaths,
+            totalDeaths = it.totalDeaths,
+            newRecovered = it.newRecovered,
+            totalRecovered = it.totalRecovered
+        )
+    }
 }
 
 

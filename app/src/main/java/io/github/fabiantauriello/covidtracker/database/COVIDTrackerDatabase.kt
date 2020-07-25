@@ -3,7 +3,7 @@ package io.github.fabiantauriello.covidtracker.database
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import io.github.fabiantauriello.covidtracker.app.MyApplication
+import io.github.fabiantauriello.covidtracker.app.COVIDTracker
 
 /**
  * My Room database
@@ -31,7 +31,7 @@ abstract class COVIDTrackerDatabase : RoomDatabase() {
                 var instance = INSTANCE
                 if (instance == null) {
                     instance = Room.databaseBuilder(
-                        MyApplication.applicationContext(),
+                        COVIDTracker.applicationContext(),
                         COVIDTrackerDatabase::class.java,
                         "covid_tracker_database"
                     ).fallbackToDestructiveMigration().build()

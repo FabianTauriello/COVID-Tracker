@@ -3,7 +3,7 @@ package io.github.fabiantauriello.covidtracker.viewmodels
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import io.github.fabiantauriello.covidtracker.DataType
+import io.github.fabiantauriello.covidtracker.database.DataType
 import io.github.fabiantauriello.covidtracker.domain.CountryData
 import io.github.fabiantauriello.covidtracker.repositories.Repository
 import io.github.fabiantauriello.covidtracker.ui.OpenCountryStatsNavigator

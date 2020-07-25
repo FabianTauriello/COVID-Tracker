@@ -8,15 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import io.github.fabiantauriello.covidtracker.R
-import io.github.fabiantauriello.covidtracker.database.COVIDTrackerDatabase
-import io.github.fabiantauriello.covidtracker.database.GlobalEntity
 import io.github.fabiantauriello.covidtracker.databinding.FragmentGlobalStatsBinding
-import io.github.fabiantauriello.covidtracker.util.asDatabaseModels
 import io.github.fabiantauriello.covidtracker.viewmodels.GlobalStatsViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class GlobalStatsFragment : Fragment(), OpenCountryListNavigator {
 
