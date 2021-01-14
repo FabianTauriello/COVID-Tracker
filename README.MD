@@ -34,3 +34,6 @@ Screenshots:
 Global Stats             |  Countries List
 :-------------------------:|:-------------------------:
 ![Global Stats](/screenshots/global-stats.png)  |  ![Countries List](/screenshots/countries-list.png)
+Global Stats             |  Countries List
+:-------------------------:|:-------------------------:
+![Global Stats](/screenshots/global-stats.png)  |  ![Countries List](/screenshots/countries-list.png)
