@@ -30,5 +30,4 @@ Global Stats             |  Countries List
 :-------------------------:|:-------------------------:
 ![Global Stats](/screenshots/global-stats.png)  |  ![Countries List](/screenshots/countries-list.png)
 Countries Search             |  Country Stats
-:-------------------------:|:-------------------------:
 ![Countries Search](/screenshots/countries-search.png)  |  ![Country Stats](/screenshots/country-stats.png)
