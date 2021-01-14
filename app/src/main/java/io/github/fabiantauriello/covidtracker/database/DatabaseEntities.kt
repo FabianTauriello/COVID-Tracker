@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 /**
  * Represents an entity in the database for storing key data on
- * COVID for a single country, or worlwide
+ * COVID for a single country, or worldwide
  */
 @Entity(tableName = "global_data")
 data class GlobalEntity(

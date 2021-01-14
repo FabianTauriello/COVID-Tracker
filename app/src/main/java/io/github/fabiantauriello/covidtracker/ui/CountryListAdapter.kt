@@ -19,11 +19,9 @@ class CountryListAdapter(
 
     private val LOG_TAG = this::class.simpleName
 
-    inner class CountryItemViewHolder(
+    class CountryItemViewHolder(
         val binding: CountryListItemBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
-
-    }
+    ) : RecyclerView.ViewHolder(binding.root)
 
     // creates view holder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryItemViewHolder {

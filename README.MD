@@ -23,3 +23,14 @@ The following features/improvements are being worked on:
 * OPTIMIZATION, OPTIMIZATION, OPTIMIZATION!
 
 Keep in mind that I'm likely to come up with more ideas for improvement as I continue to work on it.
+
+Screenshots:
+
+<img src="/screenshots/global-stats.png" width="350" height="650" />
+<img src="/screenshots/countries-list.png" width="350" height="650" />
+<img src="/screenshots/countries-search.png" width="350" height="650" />
+<img src="/screenshots/country-stats.png" width="350" height="650" />
+
+Global Stats             |  Countries List
+:-------------------------:|:-------------------------:
+![Global Stats](/screenshots/global-stats.png)  |  ![Countries List](/screenshots/countries-list.png)

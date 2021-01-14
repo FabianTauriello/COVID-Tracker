@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 
 /**
  * Repository for accessing remote and local data sources.
- * (fetches COVID data from the network (Volley) and stores them on disk (Room))
+ * (fetches COVID data from the network (Retrofit) and stores them on disk (Room))
  */
 class Repository { // TODO consider making different repositories.
 

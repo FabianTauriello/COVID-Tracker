@@ -18,7 +18,7 @@ interface COVIDTrackerService {
  */
 object COVIDTrackerNetwork {
 
-    // Configure retrofit to parse JSON and use coroutines
+    // Configure retrofit to parse JSON
     private val retrofit = Retrofit.Builder()
         .baseUrl("https://api.covid19api.com")
         .addConverterFactory(GsonConverterFactory.create())

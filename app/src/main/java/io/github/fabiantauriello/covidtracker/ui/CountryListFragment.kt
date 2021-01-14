@@ -93,6 +93,7 @@ class CountryListFragment : Fragment(), OpenCountryStatsNavigator {
                 toggleKeyboard(true, searchView)
             }
         })
+
     }
 
     private fun configureLiveDataObserver() {
