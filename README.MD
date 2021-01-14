@@ -26,14 +26,9 @@ Keep in mind that I'm likely to come up with more ideas for improvement as I con
 
 Screenshots:
 
-<img src="/screenshots/global-stats.png" width="350" height="650" />
-<img src="/screenshots/countries-list.png" width="350" height="650" />
-<img src="/screenshots/countries-search.png" width="350" height="650" />
-<img src="/screenshots/country-stats.png" width="350" height="650" />
-
 Global Stats             |  Countries List
 :-------------------------:|:-------------------------:
 ![Global Stats](/screenshots/global-stats.png)  |  ![Countries List](/screenshots/countries-list.png)
-Global Stats             |  Countries List
+Countries Search             |  Country Stats
 :-------------------------:|:-------------------------:
-![Global Stats](/screenshots/global-stats.png)  |  ![Countries List](/screenshots/countries-list.png)
+![Countries Search](/screenshots/countries-search.png)  |  ![Country Stats](/screenshots/country-stats.png)
